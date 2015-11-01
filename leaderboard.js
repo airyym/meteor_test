@@ -6,7 +6,8 @@ if(Meteor.isClient)
   ({
       'player': function()
       {
-        return PlayerList.find({}, {sort: {score:-1, name: 1}});
+        var currentUserId = Meteor.userId();
+        return PlayerList.find({createdBy:currentUserId}, {sort: {score:-1, name: 1}});
       }
       ,
       'playerCount': function()
@@ -69,9 +70,11 @@ if(Meteor.isClient)
           event.preventDefault();
           var playerNameVar = event.target.playerName.value;
           var playerScoreVar = parseInt(event.target.playerScore.value);
+          var currentUserId = Meteor.userId();
           PlayerList.insert({
               name : playerNameVar,
-              score : playerScoreVar
+              score : playerScoreVar,
+              createdBy : currentUserId
           });
 
           event.target.playerName.value = "";

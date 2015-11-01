@@ -5,6 +5,7 @@
 	<h1>Leaderboard</h1>
 	{{> leaderboard}}
 	{{> addPlayerForm}}
+	{{> loginButtons}}
 </body>
 
 <template name="leaderboard">
@@ -24,9 +25,11 @@
 </template>
 
 <template name="addPlayerForm">
+	{{#if currentUser}}
 	<form>
 		Name : <input type="text" name="playerName">
 		Score : <input type="text" name="playerScore" value=0> 
 		<input type="submit" value="Add Player">
 	</form>
+	{{/if}}
 </template>
